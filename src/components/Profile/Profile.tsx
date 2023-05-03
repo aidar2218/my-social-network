@@ -1,13 +1,24 @@
 import React from "react";
 import s from "./Profile.module.css";
-import MyPosts from "./MyPosts/MyPosts";
+import MyPosts, {PostType} from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
-const Profile = () => {
+export type ProfilePropsType = {
+    posts: Array<PostType>
+}
+
+const Profile = (props: ProfilePropsType) => {
+    // let posts = [
+    //     {id: "1", message: "Hi, how are you?", likesCount: 18},
+    //     {id: "2", message: "I'm learning React!", likesCount: 28},
+    //     {id: "3", message: "Blabla", likesCount: 16},
+    //     {id: "4", message: "Yeeeaaaa", likesCount: 12},
+    // ];
+
     return (
         <div>
             <ProfileInfo />
-            <MyPosts />
+            <MyPosts posts={props.posts}/>
         </div>
     )
 }
