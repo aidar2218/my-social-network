@@ -6,7 +6,8 @@ export type StateType = {
 }
 
 export type ProfilePageType = {
-    postsData: PostDataType[]
+    postsData: PostDataType[],
+    newPostText: string
 }
 
 export type PostDataType = {
@@ -37,7 +38,8 @@ let state: StateType = {
             {id: "2", message: "I'm learning React!", likesCount: 28},
             {id: "3", message: "Blabla", likesCount: 16},
             {id: "4", message: "Yeeeaaaa", likesCount: 12}
-        ]
+        ],
+        newPostText: "it-incubator",
     },
 
     dialogsPage: {
@@ -56,16 +58,26 @@ let state: StateType = {
     }
 }
 
-export type AddPostType = (postMessage: string) => void
+export type AddPostType = () => void
 
-export const addPost = (postMessage: string) => {
+export const addPost = () => {
     const newPost: PostDataType = {
         id: "5",
-        message: postMessage,
+        message: state.profilePage.newPostText,
         likesCount: 0
     };
     state.profilePage.postsData.push(newPost);
+    state.profilePage.newPostText = "";
     rerenderEntireTree(state);
 }
+
+export type UpdateNewPostTextType = (newText: string) => void
+
+export const updateNewPostText = (newText: string) => {
+    state.profilePage.newPostText = newText;
+    rerenderEntireTree(state);
+}
+
+
 
 export default state;
